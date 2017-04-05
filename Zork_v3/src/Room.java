@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 public class Room {
-
     class NoRoomException extends Exception {}
 
     static String CONTENTS_STARTER = "Contents: ";
@@ -161,6 +160,16 @@ public class Room {
 
     void addExit(Exit exit) {
         exits.add(exit);
+    }
+    
+    /**
+     * Checks for a matching exit that it knows is blocked, and 
+     * adds it to the ArrayList of open Exits
+     * 
+     * @param exit 
+     */
+    void unblockExit(Exit exit) {
+        
     }
 
     void add(Item item) {
