@@ -1,10 +1,10 @@
+
+ 
+
 import java.util.Scanner;
 
-/**
- *
- * @author Nathan
- */
 public class Exit {
+
     class NoExitException extends Exception {}
 
     private String dir;
@@ -25,7 +25,7 @@ public class Exit {
         @throws NoExitException The reader object is not positioned at the
         start of an exit entry. A side effect of this is the reader's cursor
         is now positioned one line past where it was.
-        @throws Dungeon.IllegalDungeonFormatException A structural problem with the
+        @throws IllegalDungeonFormatException A structural problem with the
         dungeon file itself, detected when trying to read this room.
      */
     Exit(Scanner s, Dungeon d) throws NoExitException,

@@ -1,3 +1,6 @@
+
+ 
+
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.io.FileNotFoundException;
@@ -7,6 +10,7 @@ import java.io.FileWriter;
 import java.io.PrintWriter;
 
 public class GameState {
+
     public static class IllegalSaveFormatException extends Exception {
         public IllegalSaveFormatException(String e) {
             super(e);

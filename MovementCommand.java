@@ -1,3 +1,6 @@
+
+ 
+
 class MovementCommand extends Command {
 
     private String dir;
