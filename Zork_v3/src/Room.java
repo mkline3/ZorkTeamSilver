@@ -165,7 +165,6 @@ public class Room {
     /**
      * Checks for a matching exit that it knows is blocked, and 
      * adds it to the ArrayList of open Exits
-     * 
      * @param exit 
      */
     void unblockExit(Exit exit) {
