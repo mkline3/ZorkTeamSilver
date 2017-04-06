@@ -16,6 +16,7 @@ public class AttackCommand {
     public AttackCommand(Item weapon){
         
     }
+    
     /**
      * This will return what happens when user attacks an enemy
      * @return 
