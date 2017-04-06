@@ -17,6 +17,9 @@ public class AttackCommand {
         
     }
     
+    
+    
+    
     /**
      * This will return what happens when user attacks an enemy
      * @return 
