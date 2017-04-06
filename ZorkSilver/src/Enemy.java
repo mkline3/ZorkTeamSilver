@@ -1,5 +1,5 @@
 /**
- *
+ * Enemy is an NPC that can interact with the player and store its own items
  * @author Nathan
  * @version 04.05.2017
  */
