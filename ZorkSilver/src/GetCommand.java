@@ -1,7 +1,3 @@
-package zorkGame;
-
-
-
 /**
  *
  * @author jordan.smith

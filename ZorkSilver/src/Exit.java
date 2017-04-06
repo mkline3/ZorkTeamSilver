@@ -3,8 +3,14 @@
 
 import java.util.Scanner;
 
+/**
+ *
+ * @author Jordan
+ * @author Nathan
+ * @author Matthew
+ * @author Trevor
+ */
 public class Exit {
-
     class NoExitException extends Exception {}
 
     private String dir;
