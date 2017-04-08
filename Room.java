@@ -1,13 +1,15 @@
 
- 
-
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-public class Room {
 
+/**
+ * 
+ * @author Jordan, Nathan, Matthew, Trevor
+ */
+public class Room {
     class NoRoomException extends Exception {}
 
     static String CONTENTS_STARTER = "Contents: ";
@@ -17,6 +19,7 @@ public class Room {
     private boolean beenHere;
     private ArrayList<Item> contents;
     private ArrayList<Exit> exits;
+    private ArrayList<Exit> blockedExits;
     private ArrayList<Container> containers;
 
     Room(String title) {
@@ -30,16 +33,13 @@ public class Room {
         this(s, d, true);
     }
 
-    /** Given a Scanner object positioned at the beginning of a "room" file
-        entry, read and return a Room object representing it. 
-        @param d The containing {@link edu.umw.stephen.bork.Dungeon} object, 
-        necessary to retrieve {@link edu.umw.stephen.bork.Item} objects.
-        @param initState should items listed for this room be added to it?
-        @throws NoRoomException The reader object is not positioned at the
-        start of a room entry. A side effect of this is the reader's cursor
-        is now positioned one line past where it was.
-        @throws IllegalDungeonFormatException A structural problem with the
-        dungeon file itself, detected when trying to read this room.
+    /**
+     * Constructor of type Room
+     * @param s
+     * @param d
+     * @param initState
+     * @throws Room.NoRoomException
+     * @throws Dungeon.IllegalDungeonFormatException 
      */
     Room(Scanner s, Dungeon d, boolean initState) throws NoRoomException,
         Dungeon.IllegalDungeonFormatException {
@@ -85,6 +85,7 @@ public class Room {
     private void init() {
         contents = new ArrayList<Item>();
         exits = new ArrayList<Exit>();
+        blockedExits = new ArrayList<Exit>();
         beenHere = false;
     }
 
@@ -166,6 +167,26 @@ public class Room {
     void addExit(Exit exit) {
         exits.add(exit);
     }
+    /**
+     * Removes an Exit from the Room's blocked ArrayList and adds it to exits.
+     * @param exit 
+     */
+    void unblockExit(Exit exit) {
+        if (this.blockedExits.contains(exit)) {
+            this.blockedExits.remove(exit);
+            this.exits.add(exit);
+        }
+    }
+    /**
+     * Adds a blocked exit to the room, removing it from exits ArrayList if needed
+     * @param exit 
+     */
+    void blockExit(Exit exit) {
+        if (this.exits.contains(exit)) {
+            this.exits.remove(exit);
+        }
+        this.blockedExits.add(exit);
+    }
 
     void add(Item item) {
         contents.add(item);
@@ -185,7 +206,7 @@ public class Room {
     }
     /**
      * this method will add a container object to the room
-     * 
+     * @param container
      */
     void addContainer(Container container)
     {
