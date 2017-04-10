@@ -1,5 +1,5 @@
 
- 
+package TeamSilverZork;
 
 import java.util.Scanner;
 import java.util.ArrayList;
@@ -29,6 +29,9 @@ public class GameState {
     private Dungeon dungeon;
     private ArrayList<Item> inventory;
     private Room adventurersCurrentRoom;
+    
+    private static int adventurerHealth = 150;
+    private static int adventurerScore = 0;
 
     static synchronized GameState instance() {
         if (theInstance == null) {
@@ -162,6 +165,30 @@ public class GameState {
 
     Dungeon getDungeon() {
         return dungeon;
+    }
+    
+    int getHealth(){
+    	return this.adventurerHealth;
+    }
+    
+    void reduceHealth(int damageTaken){
+    	this.adventurerHealth -= damageTaken;
+    }
+    
+    void addHealth(int healthToAdd){
+    	this.adventurerHealth += healthToAdd;
+    }
+    
+    int getScore(){
+    	return this.adventurerScore;
+    }
+    
+    void addScore(int s){
+    	this.adventurerScore += s;
+    }
+    
+    void reduceScore(int s){
+    	this.adventurerScore -= s;
     }
 
 }
