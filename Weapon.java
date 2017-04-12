@@ -5,7 +5,7 @@ import java.util.Random;
  * @author Team Silver
  * @version 1
  */
-public class Weapon extends Item
+public class Weapon 
 {
     private String name;
     private int weight;
@@ -37,6 +37,7 @@ public class Weapon extends Item
     public int swing()
     {
         //rng here
+    	return 3;
         
     }
 }

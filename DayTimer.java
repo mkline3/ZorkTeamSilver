@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package zorkGame;
+
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -43,9 +43,9 @@ public class DayTimer {
             	}
                 //System.out.println(minutes +":" + seconds);
                 if(minutes > 6 && minutes < 19)
-                    GameState.setLight(false);
+                    GameState.instance().setLight(false);
                 else
-                    GameState.setLight(true);
+                    GameState.instance().setLight(true);
             }
     };
     

@@ -21,7 +21,8 @@ public class Wound implements Events{
 	 * This will decrease the players health by the given amount.
 	 */
 	public void execute() {
-		// TODO Auto-generated method stub
+		
+		GameState.instance().reduceHealth(damageAmount);
 		
 	}
 

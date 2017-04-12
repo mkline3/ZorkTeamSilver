@@ -6,7 +6,7 @@ import java.util.ArrayList;
  * @author Team Silver
  * @version 1
  */
-public class Container extends Item
+public class Container 
 {
     private String name;
     private int weight;

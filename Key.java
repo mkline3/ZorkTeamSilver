@@ -6,7 +6,7 @@
  * @author Team Silver
  * @version (a version number or a date)
  */
-public class Key extends Item
+public class Key
 {
     private String name;
     private int weight; 
@@ -28,6 +28,6 @@ public class Key extends Item
      */
     public String use()
     {
-        
+      return null;   
     }
 }

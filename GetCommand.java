@@ -1,4 +1,3 @@
-package TeamSilverZork;
 
 public class GetCommand extends Command{
 

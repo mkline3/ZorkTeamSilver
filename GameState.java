@@ -1,6 +1,4 @@
 
-package TeamSilverZork;
-
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.io.FileNotFoundException;
@@ -29,6 +27,7 @@ public class GameState {
     private Dungeon dungeon;
     private ArrayList<Item> inventory;
     private Room adventurersCurrentRoom;
+    private static boolean isLightOut = true;
     
     private static int adventurerHealth = 150;
     private static int adventurerScore = 0;
@@ -189,6 +188,10 @@ public class GameState {
     
     void reduceScore(int s){
     	this.adventurerScore -= s;
+    }
+    
+    void setLight(boolean x){
+    	this.isLightOut = x;
     }
 
 }

@@ -1,4 +1,3 @@
-package Events;
 
 /**
  * 
@@ -7,7 +6,7 @@ package Events;
  *This class will initiate a Storm to occur in 
  *the dungeon.
  */
-public class Storm extends Events{
+public class Storm implements Events{
 
 	private int timeToLive;
 	
@@ -28,7 +27,7 @@ public class Storm extends Events{
 	 * also have a lightning side effect that randomly
 	 * hits.
 	 */
-	public void effect(){
+	public void execute(){
 		
 		
 		

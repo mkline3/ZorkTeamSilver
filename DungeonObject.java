@@ -26,6 +26,6 @@ public class DungeonObject
      */
     public String use()
     {
-        
+        return null;
     }
 }
