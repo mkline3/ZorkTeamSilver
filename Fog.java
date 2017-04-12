@@ -1,4 +1,4 @@
-package Events;
+
 
 /**
  * 
@@ -7,13 +7,13 @@ package Events;
  * you are in "room" that is outside. 
  */
 
-public class Fog extends Events{
+public class Fog implements Events{
 
 	private int timeToLive;
 	
 	/**
 	 * 
-	 * @param ttl
+	 * @param ttl how long the fog will last
 	 * This creates the Fog object that lasts as long
 	 * as the seconds given.
 	 */
@@ -26,7 +26,7 @@ public class Fog extends Events{
 	 * different messages for exits while the player is 
 	 * outside, making it difficult to navigate.
 	 */
-	public void effect(){
+	public void execute(){
 		
 	}
 	
