@@ -1,11 +1,9 @@
 
- 
-
 import java.util.Scanner;
 import java.util.Hashtable;
 
-public class Item {
 
+public class Item {
     static class NoItemException extends Exception {}
 
     private String primaryName;
