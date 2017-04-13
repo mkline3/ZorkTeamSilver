@@ -1,0 +1,43 @@
+Test Dungeon
+Zork v1.0
+===
+Items:
+Block
+10
+kick[Score(-1),Wound(2)]:You hurt your foot trying to kick the block.
+throw:The block flies through the air.
+---
+Sword
+25
+activate[Score(1),Wound(-1)]:The sword lets off a magic healing energy.
+---
+Apple
+5
+eat[Wound(-10)]:CRUNCH!!
+---
+Bomb
+10
+detonate[Die]:Shrapnel flies everywhere, killing you instantly.
+ignite[DeadTimer(1)]:Tssssss....
+---
+===
+Rooms:
+Room1
+Contents: Block,Bomb
+A basic room with one exit north.
+---
+Room2
+Contents: Sword,Apple
+A second basic room with an exit back the way you came.
+---
+===
+Exits:
+Room1
+n
+Room2
+---
+Room2
+s
+Room1
+---
+===
