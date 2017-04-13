@@ -24,7 +24,7 @@ public class Interpreter {
         try {
             state = GameState.instance();
             
-            if (filename.endsWith(".bork")) {
+            if (filename.endsWith(".zork")) {
                 state.initialize(new Dungeon(filename));
                 System.out.println("\nWelcome to " + 
                     state.getDungeon().getName() + "!");
@@ -43,11 +43,19 @@ public class Interpreter {
             command = promptUser(commandLine);
 
             while (!command.equals("q")) {
-
+                
                 System.out.print(
                     CommandFactory.instance().parse(command).execute());
-
+                
+                 if(GameState.instance().getHealth() < 1){
+                    System.out.println("You Died!");
+                    System.exit(0);
+                }
+                
+                
                 command = promptUser(commandLine);
+                
+               
             }
 
             System.out.println("Bye!");

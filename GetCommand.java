@@ -10,13 +10,13 @@ public class GetCommand extends Command{
 	String execute() {
 		
 		if(whatToGet.equalsIgnoreCase("health")){
-			return "Your current health is " + GameState.instance().getHealth();
+			return "Your current health is " + GameState.instance().getHealth()+"\n";
 		}
 		else if(whatToGet.equalsIgnoreCase("score")){
-			return "Your current score is " + GameState.instance().getScore();
+			return "Your current score is " + GameState.instance().getScore()+"\n";
 		}
 		else
-			return "I dont know what " + whatToGet + " is.";
+			return "I dont know what " + whatToGet + " is.\n";
 		
 	}
 

@@ -20,6 +20,7 @@ class TakeCommand extends Command {
             GameState.instance().addToInventory(theItem);
             currentRoom.remove(theItem);
             return itemName + " taken.\n";
+      
         } catch (Item.NoItemException e) {
             // Check and see if we have this already. If no exception is
             // thrown from the line below, then we do.

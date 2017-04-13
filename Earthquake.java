@@ -10,12 +10,6 @@
 public class Earthquake implements Events{
 
 
-	/**
-	 * 
-	 * @param ttl
-	 * This will allow you to create an 
-	 * Earthquake object.
-	 */
 	
 	/**
 	 * This method searches the rooms in the Dungeon
@@ -27,5 +21,15 @@ public class Earthquake implements Events{
 		
 		
 	}
+
+    @Override
+    public boolean hasCalledTimer() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void setHasCalledTimer(boolean x) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 	
 }

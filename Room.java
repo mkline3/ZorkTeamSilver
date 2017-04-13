@@ -155,6 +155,22 @@ public class Room {
         return description;
     }
     
+    public String fullDescribe(){
+        String description = title + "\n" + desc;
+        
+        for (Item item : contents) {
+            description += "\nThere is a " + item.getPrimaryName() + " here.";
+        }
+        if (contents.size() > 0) { description += "\n"; }
+        if (!beenHere) {
+            for (Exit exit : exits) {
+                description += "\n" + exit.describe();
+            }
+        }
+        beenHere = true;
+        return description;
+    }
+    
     public Room leaveBy(String dir) {
         for (Exit exit : exits) {
             if (exit.getDir().equals(dir)) {
@@ -198,7 +214,7 @@ public class Room {
 
     Item getItemNamed(String name) throws Item.NoItemException {
         for (Item item : contents) {
-            if (item.goesBy(name)) {
+            if (item.toString().equalsIgnoreCase(name)) {
                 return item;
             }
         }

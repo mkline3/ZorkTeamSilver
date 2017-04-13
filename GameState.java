@@ -15,9 +15,9 @@ public class GameState {
         }
     }
 
-    static String DEFAULT_SAVE_FILE = "bork_save";
+    static String DEFAULT_SAVE_FILE = "zork_save";
     static String SAVE_FILE_EXTENSION = ".sav";
-    static String SAVE_FILE_VERSION = "Bork v3.0 save data";
+    static String SAVE_FILE_VERSION = "Zork v1.0 save data";
 
     static String ADVENTURER_MARKER = "Adventurer:";
     static String CURRENT_ROOM_LEADER = "Current room: ";
@@ -147,7 +147,7 @@ public class GameState {
     Item getItemFromInventoryNamed(String name) throws Item.NoItemException {
 
         for (Item item : inventory) {
-            if (item.goesBy(name)) {
+            if (item.toString().equalsIgnoreCase(name)) {
                 return item;
             }
         }
@@ -171,10 +171,18 @@ public class GameState {
     }
     
     void reduceHealth(int damageTaken){
-    	this.adventurerHealth -= damageTaken;
+    	if(damageTaken > 0){
+    		System.out.println("You lost "+damageTaken+" health!");
+    		this.adventurerHealth = adventurerHealth - damageTaken;
+    	}
+    	else if(damageTaken < 0){
+    		System.out.println("You gained "+(damageTaken*-1)+" health!");
+    		this.adventurerHealth = adventurerHealth - damageTaken;
+    	}
     }
     
     void addHealth(int healthToAdd){
+    	
     	this.adventurerHealth += healthToAdd;
     }
     
