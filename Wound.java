@@ -20,10 +20,20 @@ public class Wound implements Events{
 	/**
 	 * This will decrease the players health by the given amount.
 	 */
-	public void execute() {
+	public void execute() { 
 		
 		GameState.instance().reduceHealth(damageAmount);
 		
 	}
+
+    @Override
+    public boolean hasCalledTimer() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void setHasCalledTimer(boolean x) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 
 }
