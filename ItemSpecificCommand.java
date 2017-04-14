@@ -23,6 +23,7 @@ class ItemSpecificCommand extends Command {
         this.noun = noun;
         events = new ArrayList<>();
     }
+    
 /**
  * 
  * @return returns the message corresponding to the noun given
@@ -40,30 +41,23 @@ class ItemSpecificCommand extends Command {
         
         String msg = itemReferredTo.getMessageForVerb(verb);
       
-        try{
+        try {
             Set<Events> keys = GameState.instance().getItemInVicinityNamed(noun).itemEvents().keySet();
             
-            for(Events e : keys){
-                
-                
-                if(GameState.instance().getItemInVicinityNamed(noun).itemEvents().get(e).equalsIgnoreCase(verb)){
+            for (Events e : keys) {
+                if (GameState.instance().getItemInVicinityNamed(noun).itemEvents().get(e).equalsIgnoreCase(verb)) {
                     this.events.add(e);
-                        }
+                }
             }
-        }catch(Item.NoItemException e){
+        } catch (Item.NoItemException e) {
             
-           
         }
         
         //Execute all events associated with this command
-        for(Events e : events){
+        for (Events e : events) {
             e.execute();
         }
         
-        
-        
-        return (msg == null ? 
-            "Sorry, you can't " + verb + " the " + noun + "." : msg) + "\n";
-
+        return (msg == null ? "Sorry, you can't " + verb + " the " + noun + "." : msg) + "\n";
     }
 }

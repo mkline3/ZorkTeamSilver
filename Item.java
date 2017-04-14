@@ -42,13 +42,15 @@ public class Item {
             }
             
             String[] verbParts = verbLine.split(":");
+            String verb;
+            String message;
             
             //if the verb has any events attached to it read them, else just get the verb and message
             if(verbParts[0].contains("[")){
                 // Get only the stuff between the brackets, and split it by comma
                 String[] firstSplit = verbParts[0].substring(verbParts[0].indexOf("[")+1,verbParts[0].indexOf("]")).split(",");
                 ArrayList<Events> forVerb = new ArrayList<Events>();
-                String verb = verbParts[0].substring(0, verbParts[0].indexOf("["));
+                verb = verbParts[0].substring(0, verbParts[0].indexOf("["));
                 
                 for (String evLine : firstSplit) {
                     String evName = "";
@@ -73,14 +75,11 @@ public class Item {
                     else if (evName.equalsIgnoreCase("Wound"))
                     	this.events.put(new Wound(Integer.parseInt(evParam)), verb);
                 }
-                // Check to make sure verb's message gets saved
-                
             } else {
-                String verb = verbParts[0];
-                String message = verbParts[1];
-                messages.put(verb, message);
+                verb = verbParts[0];
             }
             
+            messages.put(verb, verbParts[1]);
             verbLine = s.nextLine();
         }
     }
