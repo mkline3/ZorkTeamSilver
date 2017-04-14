@@ -16,14 +16,15 @@ public class TransformEvent implements Events {
         Item newItem;
         
         try {
-            //Places to change:
-            //CurrentRoom
-            //Inventory
             newItem = GameState.instance().getDungeon().getItem(itemName);
             GameState gs = GameState.instance();
             
             if (gs.getItemFromInventoryNamed(orig.getPrimaryName()) != null) {
                 gs.removeFromInventory(orig);
+                gs.addToInventory(newItem);
+            } else if (gs.getAdventurersCurrentRoom().getItemNamed(itemName) != null) {
+                gs.getAdventurersCurrentRoom().remove(orig);
+                gs.getAdventurersCurrentRoom().add(newItem);
             }
         } catch (Item.NoItemException ex) {
             
