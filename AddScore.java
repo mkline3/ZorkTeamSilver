@@ -17,13 +17,18 @@ public class AddScore implements Events{
         this.value = value;
     }
     public void execute() {
-        GameState.instance().addScore(value);
-        if(value > 1)
+        
+        if(value > 1){
             System.out.println("You gained " + value + " points!");
-        else if(value < 0)
+            GameState.instance().addScore(value);
+        }
+        else if(value < 0){
             System.out.println("You lost " + value + " points!");
-        else if(value == 1)
+        }
+        else if(value == 1){
             System.out.println("You earned a point for your score!");
+            GameState.instance().addScore(value);
+        }
     }
 
     @Override

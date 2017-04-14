@@ -41,8 +41,9 @@ public class Interpreter {
                 state.getAdventurersCurrentRoom().describe() + "\n");
 
             command = promptUser(commandLine);
-
-            while (!command.equals("q")) {
+            boolean running = true;
+            
+            while (running) {
                 
                 System.out.print(
                     CommandFactory.instance().parse(command).execute());

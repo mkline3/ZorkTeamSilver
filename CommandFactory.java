@@ -40,6 +40,8 @@ public class CommandFactory {
         if (verb.equalsIgnoreCase("describe") || verb.equalsIgnoreCase("desc")){
             return new DescribeCommand();
         }
+        if (verb.equalsIgnoreCase("quit") || verb.equalsIgnoreCase("q"))
+        	return new QuitCommand();
         if (verb.equals("i") || verb.equals("inventory")) {
             return new InventoryCommand();
         }

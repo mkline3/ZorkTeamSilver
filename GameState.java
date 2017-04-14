@@ -22,6 +22,8 @@ public class GameState {
     static String ADVENTURER_MARKER = "Adventurer:";
     static String CURRENT_ROOM_LEADER = "Current room: ";
     static String INVENTORY_LEADER = "Inventory: ";
+    static String HEALTH_LEADER = "Health: ";
+    static String SCORE_LEADER = "Score: ";
 
     private static GameState theInstance;
     private Dungeon dungeon;
@@ -68,19 +70,32 @@ public class GameState {
         String currentRoomLine = s.nextLine();
         adventurersCurrentRoom = dungeon.getRoom(
             currentRoomLine.substring(CURRENT_ROOM_LEADER.length()));
-        if (s.hasNext()) {
-            String inventoryList = s.nextLine().substring(
-                INVENTORY_LEADER.length());
-            String[] inventoryItems = inventoryList.split(",");
-            for (String itemName : inventoryItems) {
-                try {
-                    addToInventory(dungeon.getItem(itemName));
-                } catch (Item.NoItemException e) {
-                    throw new IllegalSaveFormatException("No such item '" +
-                        itemName + "'");
-                }
-            }
+        while (s.hasNext()) {
+        	String next = s.nextLine();
+        	if(next.contains(INVENTORY_LEADER)){
+	            String inventoryList = next.substring(
+	                INVENTORY_LEADER.length());
+	            String[] inventoryItems = inventoryList.split(",");
+	            for (String itemName : inventoryItems) {
+	                try {
+	                    addToInventory(dungeon.getItem(itemName));
+	                } catch (Item.NoItemException e) {
+	                    throw new IllegalSaveFormatException("No such item '" +
+	                        itemName + "'");
+	                }
+	            }
+        	}
+        	else if(next.contains(HEALTH_LEADER)){
+        		String[] sep = next.split(":");
+        		this.setHealth(Integer.parseInt(sep[1].replace(" ", "")));
+        		
+        	}
+        	else if(next.contains(SCORE_LEADER)){
+        		String[] sep = next.split(":");
+        		this.setScore(Integer.parseInt(sep[1].replace(" ", "")));
+        	}
         }
+        
     }
 
     void store() throws IOException {
@@ -101,6 +116,13 @@ public class GameState {
             }
             w.println(inventory.get(inventory.size()-1).getPrimaryName());
         }
+        
+        w.print(HEALTH_LEADER);
+        w.print(GameState.instance().getHealth());
+        w.println();
+        w.print(SCORE_LEADER);
+        w.print(GameState.instance().getScore());
+        
         w.close();
     }
 
@@ -170,22 +192,26 @@ public class GameState {
     	return this.adventurerHealth;
     }
     
+    void setHealth(int health){
+    	this.adventurerHealth = health;
+    }
+    
     void reduceHealth(int damageTaken){
     	if(damageTaken > 0){
-    		System.out.println("You lost "+damageTaken+" health!");
+    		System.out.println("You took " + damageTaken + " damage!");
     		this.adventurerHealth = adventurerHealth - damageTaken;
     	}
     	else if(damageTaken < 0){
-    		System.out.println("You gained "+(damageTaken*-1)+" health!");
-    		this.adventurerHealth = adventurerHealth - damageTaken;
+    		System.out.println("You gained " + damageTaken + " health!");
     	}
     }
     
     void addHealth(int healthToAdd){
-    	
     	this.adventurerHealth += healthToAdd;
     }
-    
+    void setScore(int x){
+    	this.adventurerScore = x;
+    }
     int getScore(){
     	return this.adventurerScore;
     }
