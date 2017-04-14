@@ -3,29 +3,22 @@
  *
  * @author Nathan
  */
-public class TransformEvent implements Events {
-    private String itemName;
+public class DisappearEvent implements Events {
     private Item orig;
     
-    public TransformEvent(String itemName, Item orig) {
-        this.itemName = itemName;
+    public DisappearEvent(Item orig) {
         this.orig = orig;
     }
     
     @Override
     public void execute() {
-        Item newItem;
-        
         try {
-            newItem = GameState.instance().getDungeon().getItem(itemName);
             GameState gs = GameState.instance();
             
             if (gs.getItemFromInventoryNamed(orig.getPrimaryName()) != null) {
                 gs.removeFromInventory(orig);
-                gs.addToInventory(newItem);
             } else if (gs.getAdventurersCurrentRoom().getItemNamed(orig.getPrimaryName()) != null) {
                 gs.getAdventurersCurrentRoom().remove(orig);
-                gs.getAdventurersCurrentRoom().add(newItem);
             }
         } catch (Item.NoItemException ex) {
             

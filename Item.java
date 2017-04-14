@@ -64,9 +64,11 @@ public class Item {
                         this.events.put(new Die(Integer.parseInt(evParam), this), verb);
                     else if (evName.equalsIgnoreCase("Die"))
                     	this.events.put(new Die(), verb);
+                    else if (evName.equalsIgnoreCase("Disappear"))
+                    	this.events.put(new DisappearEvent(this), verb);
                     else if (evName.equalsIgnoreCase("Score"))
                     	this.events.put(new AddScore(Integer.parseInt(evParam)), verb);
-                    else if (evName.equalsIgnoreCase("Score"))
+                    else if (evName.equalsIgnoreCase("Transform"))
                     	this.events.put(new TransformEvent(evParam, this), verb);
                     else if (evName.equalsIgnoreCase("Wound"))
                     	this.events.put(new Wound(Integer.parseInt(evParam)), verb);
