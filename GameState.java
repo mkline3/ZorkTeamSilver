@@ -71,31 +71,30 @@ public class GameState {
         adventurersCurrentRoom = dungeon.getRoom(
             currentRoomLine.substring(CURRENT_ROOM_LEADER.length()));
         while (s.hasNext()) {
-        	String next = s.nextLine();
-        	if(next.contains(INVENTORY_LEADER)){
-	            String inventoryList = next.substring(
-	                INVENTORY_LEADER.length());
-	            String[] inventoryItems = inventoryList.split(",");
-	            for (String itemName : inventoryItems) {
-	                try {
-	                    addToInventory(dungeon.getItem(itemName));
-	                } catch (Item.NoItemException e) {
-	                    throw new IllegalSaveFormatException("No such item '" +
-	                        itemName + "'");
-	                }
-	            }
-        	}
-        	else if(next.contains(HEALTH_LEADER)){
-        		String[] sep = next.split(":");
-        		this.setHealth(Integer.parseInt(sep[1].replace(" ", "")));
-        		
-        	}
-        	else if(next.contains(SCORE_LEADER)){
-        		String[] sep = next.split(":");
-        		this.setScore(Integer.parseInt(sep[1].replace(" ", "")));
-        	}
+            String next = s.nextLine();
+            if(next.contains(INVENTORY_LEADER)){
+                String inventoryList = next.substring(
+                    INVENTORY_LEADER.length());
+                String[] inventoryItems = inventoryList.split(",");
+                for (String itemName : inventoryItems) {
+                    try {
+                        addToInventory(dungeon.getItem(itemName));
+                    } catch (Item.NoItemException e) {
+                        throw new IllegalSaveFormatException("No such item '" +
+                            itemName + "'");
+                    }
+                }
+            }
+            else if(next.contains(HEALTH_LEADER)){
+                    String[] sep = next.split(":");
+                    this.setHealth(Integer.parseInt(sep[1].replace(" ", "")));
+
+            }
+            else if(next.contains(SCORE_LEADER)){
+                    String[] sep = next.split(":");
+                    this.setScore(Integer.parseInt(sep[1].replace(" ", "")));
+            }
         }
-        
     }
 
     void store() throws IOException {
@@ -129,6 +128,7 @@ public class GameState {
     void initialize(Dungeon dungeon) {
         this.dungeon = dungeon;
         adventurersCurrentRoom = dungeon.getEntry();
+        System.out.println(adventurersCurrentRoom.getTitle());
     }
 
     ArrayList<String> getInventoryNames() {
