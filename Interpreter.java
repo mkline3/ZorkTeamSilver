@@ -1,6 +1,7 @@
 
  
 
+import java.util.Random;
 import java.util.Scanner;
 
 
@@ -43,10 +44,16 @@ public class Interpreter {
             command = promptUser(commandLine);
 
             while (!command.equals("q")) {
-                
+                Random rand = new Random();
+                int x = rand.nextInt(100);
+               
                 System.out.print(
-                    CommandFactory.instance().parse(command).execute());
-                
+                           CommandFactory.instance().parse(command).execute());
+                          
+                if(x<10){
+                    teleport t = new teleport();
+                          System.out.println(t.execute() );
+                          }
                  if(GameState.instance().getHealth() < 1){
                     System.out.println("You Died!");
                     System.exit(0);

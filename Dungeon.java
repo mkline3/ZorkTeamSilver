@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.PrintWriter;
+import java.util.Map;
 
 public class Dungeon {
 
@@ -182,5 +183,19 @@ public class Dungeon {
             throw new Item.NoItemException();
         }
         return items.get(primaryItemName);
+    }
+    /**
+     * This allows for the rooms to be accessed in teleport
+     * @return 
+     */
+     public String[] getHash(){
+        String[] keys = new String[rooms.size()];
+     int index = 0;
+     for (Map.Entry<String, Room> mapEntry : rooms.entrySet()) {
+         keys[index] = mapEntry.getKey();
+    
+         index++;
+        }
+        return  keys;
     }
 }
