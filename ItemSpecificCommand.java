@@ -22,9 +22,6 @@ class ItemSpecificCommand extends Command {
         this.verb = verb;
         this.noun = noun;
         events = new ArrayList<>();
-        
-        
-        
     }
 /**
  * 
@@ -42,10 +39,7 @@ class ItemSpecificCommand extends Command {
         }
         
         String msg = itemReferredTo.getMessageForVerb(verb);
-        
-        
-        
-        //Find event and execute if not null
+      
         try{
             Set<Events> keys = GameState.instance().getItemInVicinityNamed(noun).itemEvents().keySet();
             
@@ -70,5 +64,6 @@ class ItemSpecificCommand extends Command {
         
         return (msg == null ? 
             "Sorry, you can't " + verb + " the " + noun + "." : msg) + "\n";
+
     }
 }

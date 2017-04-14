@@ -16,12 +16,13 @@ public class Item {
     private int weight;
     private Hashtable<String,String> messages;
     private Hashtable<Events, String> events = new Hashtable<>();
-    
+   
 
     Item(Scanner s) throws NoItemException,
         Dungeon.IllegalDungeonFormatException {
 
         messages = new Hashtable<String,String>();
+        
 
         // Read item name.
         primaryName = s.nextLine();
@@ -42,85 +43,40 @@ public class Item {
             
             String[] verbParts = verbLine.split(":");
             
-            String[] firstSplit = verbParts[0].split(",");
-            
-            
             //if the verb has any events attached to it read them, else just get the verb and message
             if(verbParts[0].contains("[")){
+                // Get only the stuff between the brackets, and split it by comma
+                String[] firstSplit = verbParts[0].substring(verbParts[0].indexOf("[")+1,verbParts[0].indexOf("]")).split(",");
+                ArrayList<Events> forVerb = new ArrayList<Events>();
+                String verb = verbParts[0].substring(0, verbParts[0].indexOf("["));
                 
-                //Getting the verb and first event
-                String edited = firstSplit[0];
-                String[] actionAndFirstEvent = edited.split("\\[");
-
-                String verb = actionAndFirstEvent[0];
-                String firstEvent = actionAndFirstEvent[1];
-                //This arraylist will catch all the events for this class and format them later
-                ArrayList<String> followingEvents = new ArrayList<>();
-                String message = verbParts[1];
-                
-                //add first event
-                followingEvents.add(firstEvent);
-
-                
-                //If more than one event is present
-                if(firstSplit.length > 1){
-                    //For each event following the first, add it to the array list
-                    for(int i = 1; i < firstSplit.length; i++){
-                        followingEvents.add(firstSplit[i]);
-                    }
-                }
-                 //This goes through and finds the last bracket to erase it.
-                 for(int i = 0; i < followingEvents.size(); i++){
-                    followingEvents.set(i, followingEvents.get(i).replace("]", ""));
-                }
-                
-                
-                //Puts the message for the verb in the hashtable
-                this.messages.put(verb, message);
-
-                
-
-               
-
-                /**
-                 * Left over testing code
-                for(String x : followingEvents){
-
-                    System.out.println(x);
-                }
-
-                System.out.println(this.messages.get(verb));
-                */
-
-                for(String x : followingEvents){
+                for (String evLine : firstSplit) {
+                    String evName = "";
+                    String evParam = "";
                     
-                    String[] openParenthSplit = x.split("\\(");
-
-                    String eventToMake = openParenthSplit[0];
-                    int value = 0;
-                    try{
-                    value = Integer.parseInt(openParenthSplit[1].replace(")", ""));
-                    }catch(Exception e){
-                            
+                    if (evLine.contains("(")) {
+                        evName = evLine.substring(0, evLine.indexOf("("));
+                        evParam = evLine.substring(evLine.indexOf("(")+1, evLine.indexOf(")"));
+                    } else {
+                        evName = evLine;
                     }
-
-                    if(eventToMake.equalsIgnoreCase("Wound"))
-                        this.events.put(new Wound(value), verb);
-                    else if(eventToMake.equalsIgnoreCase("Score"))
-                        this.events.put(new AddScore(value), verb);
-                    else if(eventToMake.equalsIgnoreCase("Die"))
-                        this.events.put(new Die(), verb);
-                    else if(eventToMake.equalsIgnoreCase("DeadTimer"))
-                        this.events.put(new Die(value, this), verb);
-                    
-
+                    if (evName.equalsIgnoreCase("DeadTimer"))
+                        this.events.put(new Die(Integer.parseInt(evParam), this), verb);
+                    else if (evName.equalsIgnoreCase("Die"))
+                    	this.events.put(new Die(), verb);
+                    else if (evName.equalsIgnoreCase("Score"))
+                    	this.events.put(new AddScore(Integer.parseInt(evParam)), verb);
+                    else if (evName.equalsIgnoreCase("Score"))
+                    	this.events.put(new TransformEvent(evParam), verb);
+                    else if (evName.equalsIgnoreCase("Wound"))
+                    	this.events.put(new Wound(Integer.parseInt(evParam)), verb);
                 }
-            }
-            else{
+                
+                
+            } else {
                 String verb = verbParts[0];
                 String message = verbParts[1];
                 messages.put(verb, message);
-                
             }
             
             verbLine = s.nextLine();
@@ -142,15 +98,7 @@ public class Item {
         return primaryName;
     }
     
-    public String getVerbForEvent(Events event){
-        if(events.containsKey(event))
-            return events.get(event);
-        else
-            return null;
-    }
-    
     public Hashtable<Events, String> itemEvents(){
         return this.events;
     }
-    
 }
