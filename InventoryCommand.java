@@ -10,7 +10,7 @@ class InventoryCommand extends Command {
 
     public String execute() {
         ArrayList<String> names = GameState.instance().getInventoryNames();
-        if (names.size() == 0) {
+        if (names.isEmpty()) {
             return "You are empty-handed.\n";
         }
         String retval = "You are carrying:\n";
