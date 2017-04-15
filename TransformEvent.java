@@ -14,21 +14,34 @@ public class TransformEvent implements Events {
     
     @Override
     public void execute() {
+        GameState gs = GameState.instance();
         Item newItem;
+        boolean found = true;
         
+        // Check the player's inventory
         try {
             newItem = GameState.instance().getDungeon().getItem(itemName);
-            GameState gs = GameState.instance();
             
             if (gs.getItemFromInventoryNamed(orig.getPrimaryName()) != null) {
                 gs.removeFromInventory(orig);
                 gs.addToInventory(newItem);
-            } else if (gs.getAdventurersCurrentRoom().getItemNamed(orig.getPrimaryName()) != null) {
-                gs.getAdventurersCurrentRoom().remove(orig);
-                gs.getAdventurersCurrentRoom().add(newItem);
             }
         } catch (Item.NoItemException ex) {
-            
+            found = false;
+        }
+        
+        // If it's not in the inventory, then check the room
+        if (!found) {
+            try {
+                newItem = GameState.instance().getDungeon().getItem(itemName);
+                
+                if (gs.getAdventurersCurrentRoom().getItemNamed(orig.getPrimaryName()) != null) {
+                    gs.getAdventurersCurrentRoom().remove(orig);
+                    gs.getAdventurersCurrentRoom().add(newItem);
+                }
+            } catch (Item.NoItemException ex) {
+                
+            }
         }
     }
 

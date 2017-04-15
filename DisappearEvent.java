@@ -12,16 +12,24 @@ public class DisappearEvent implements Events {
     
     @Override
     public void execute() {
+        GameState gs = GameState.instance();
+        Item newItem;
+        boolean found = true;
+        
+        // Check the player's inventory
         try {
-            GameState gs = GameState.instance();
-            
             if (gs.getItemFromInventoryNamed(orig.getPrimaryName()) != null) {
                 gs.removeFromInventory(orig);
-            } else if (gs.getAdventurersCurrentRoom().getItemNamed(orig.getPrimaryName()) != null) {
-                gs.getAdventurersCurrentRoom().remove(orig);
             }
-        } catch (Item.NoItemException ex) {
-            
+        } catch (Item.NoItemException ex) { found = false; }
+        
+        // If it's not in the inventory, then check the room
+        if (!found) {
+            try {
+                if (gs.getAdventurersCurrentRoom().getItemNamed(orig.getPrimaryName()) != null) {
+                    gs.getAdventurersCurrentRoom().remove(orig);
+                }
+            } catch (Item.NoItemException ex) { }
         }
     }
 
