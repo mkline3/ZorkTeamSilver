@@ -43,7 +43,6 @@ public class Item {
             
             String[] verbParts = verbLine.split(":");
             String verb;
-            String message;
             
             //if the verb has any events attached to it read them, else just get the verb and message
             if(verbParts[0].contains("[")){
