@@ -143,7 +143,8 @@ public class Room {
             description = title + "\n" + desc;
         }
         for (Item item : contents) {
-            description += "\nThere is a " + item.getPrimaryName() + " here.";
+            description += "\nThere is " + Dungeon.aOrAn(item.getPrimaryName())
+                    + item.getPrimaryName() + " here.";
         }
         if (contents.size() > 0) { description += "\n"; }
         if (!beenHere) {
@@ -159,7 +160,8 @@ public class Room {
         String description = title + "\n" + desc;
         
         for (Item item : contents) {
-            description += "\nThere is a " + item.getPrimaryName() + " here.";
+            description += "\nThere is " + Dungeon.aOrAn(item.getPrimaryName())
+                    + item.getPrimaryName() + " here.";
         }
         if (contents.size() > 0) { description += "\n"; }
         if (!beenHere) {

@@ -16,7 +16,25 @@ public class Dungeon {
             super(e);
         }
     }
+    
+    /**
+     * Checks the word given to see whether "a" or "an" is appropriate.
+     * @param word
+     * @return a or an
+     */
+    public static String aOrAn(String word) {
+        return "AEIOUaeiou".contains(word.substring(0, 1)) ? "an " : "a ";
+    }
 
+    /**
+     * Checks the word given to see whether "a" or "an" is appropriate.
+     * @param word
+     * @return a or an
+     */
+    public static String aOrAnCap(String word) {
+        return "AEIOUaeiou".contains(word.substring(0, 1)) ? "An " : "A ";
+    }
+    
     // Variables relating to both dungeon file and game state storage.
     public static String TOP_LEVEL_DELIM = "===";
     public static String SECOND_LEVEL_DELIM = "---";
